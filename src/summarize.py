@@ -1,15 +1,13 @@
 import os
 import json
-from openai import AzureOpenAI
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = AzureOpenAI(
-    api_key=os.getenv("AZURE_OPENAI_KEY"),
-    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-    api_version="2025-01-01-preview"
-)
+ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+API_KEY = os.getenv("AZURE_OPENAI_KEY")
+DEPLOYMENT = os.getenv("AZURE_OPENAI_DEPLOYMENT")
 
 def load_patients():
     with open("data/patients.json", "r") as f:
@@ -36,10 +34,16 @@ def analyze_patient(patient: dict) -> dict:
     Patient Data:
     {json.dumps(patient, indent=2)}
     """
+
+    url = f"{ENDPOINT}openai/deployments/{DEPLOYMENT}/chat/completions?api-version=2024-10-21"
     
-    response = client.chat.completions.create(
-        model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
-        messages=[
+    headers = {
+        "Content-Type": "application/json",
+        "api-key": API_KEY
+    }
+    
+    body = {
+        "messages": [
             {
                 "role": "system",
                 "content": "You are an expert clinical AI assistant. Be concise, accurate and actionable."
@@ -49,15 +53,19 @@ def analyze_patient(patient: dict) -> dict:
                 "content": prompt
             }
         ],
-        temperature=0.3,
-        max_tokens=600
-    )
+        "temperature": 0.3,
+        "max_tokens": 600
+    }
+    
+    response = requests.post(url, headers=headers, json=body)
+    response.raise_for_status()
+    result = response.json()
     
     return {
         "patient_id": patient["patient_id"],
         "name": patient["name"],
         "age": patient["age"],
-        "analysis": response.choices[0].message.content
+        "analysis": result["choices"][0]["message"]["content"]
     }
 
 def main():

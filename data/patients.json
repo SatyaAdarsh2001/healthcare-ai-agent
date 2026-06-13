@@ -1,0 +1,50 @@
+[
+  {
+    "patient_id": "P001",
+    "name": "John Doe",
+    "age": 65,
+    "gender": "Male",
+    "diagnosis": ["Type 2 Diabetes", "Hypertension", "Chronic Kidney Disease Stage 3"],
+    "medications": ["Metformin 500mg", "Lisinopril 10mg", "Atorvastatin 20mg"],
+    "last_visit": "2026-06-01",
+    "vitals": {
+      "blood_pressure": "145/92",
+      "blood_glucose": "210 mg/dL",
+      "creatinine": "2.1 mg/dL",
+      "bmi": 31.2
+    },
+    "notes": "Patient reports fatigue and occasional dizziness"
+  },
+  {
+    "patient_id": "P002",
+    "name": "Mary Smith",
+    "age": 45,
+    "gender": "Female",
+    "diagnosis": ["Asthma", "Anxiety Disorder"],
+    "medications": ["Albuterol inhaler", "Sertraline 50mg"],
+    "last_visit": "2026-05-28",
+    "vitals": {
+      "blood_pressure": "118/76",
+      "blood_glucose": "95 mg/dL",
+      "creatinine": "0.9 mg/dL",
+      "bmi": 24.1
+    },
+    "notes": "Patient reports increased anxiety episodes"
+  },
+  {
+    "patient_id": "P003",
+    "name": "Robert Johnson",
+    "age": 72,
+    "gender": "Male",
+    "diagnosis": ["Heart Failure", "Atrial Fibrillation", "Type 2 Diabetes"],
+    "medications": ["Warfarin 5mg", "Digoxin 0.125mg", "Furosemide 40mg", "Metformin 500mg"],
+    "last_visit": "2026-06-10",
+    "vitals": {
+      "blood_pressure": "158/96",
+      "blood_glucose": "245 mg/dL",
+      "creatinine": "2.8 mg/dL",
+      "bmi": 28.9
+    },
+    "notes": "Patient reports shortness of breath and leg swelling"
+  }
+]
